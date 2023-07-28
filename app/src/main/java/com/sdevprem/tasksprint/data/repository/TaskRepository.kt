@@ -5,6 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.dataObjects
 import com.google.firebase.firestore.ktx.toObject
+import com.sdevprem.tasksprint.data.TaskFilter
 import com.sdevprem.tasksprint.data.model.Task
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -17,15 +18,16 @@ class TaskRepository @Inject constructor(
     val firestore: FirebaseFirestore,
     val auth: FirebaseAuth
 ) {
-    val tasks: Flow<List<Task>>
-        get() = auth.currentUser?.uid?.let {
-            firestore.collection(COLLECTION_TASK)
-                .orderBy("dueDate", Query.Direction.DESCENDING)
-                .whereEqualTo(FIELD_USER_ID, it)
-                .dataObjects()
-        } ?: flow {
-            emit(emptyList())
-        }
+    fun getFilteredTask(taskFilter: TaskFilter): Flow<List<Task>> = auth.currentUser?.uid?.let {
+        firestore.collection(COLLECTION_TASK)
+            .whereEqualTo(FIELD_USER_ID, it)
+            .orderBy("dueDate", Query.Direction.DESCENDING)
+            .whereGreaterThanOrEqualTo("dueDate", taskFilter.fromDate)
+            .whereLessThanOrEqualTo("dueDate", taskFilter.toDate)
+            .dataObjects()
+    } ?: flow {
+        emit(emptyList())
+    }
 
     suspend fun getTask(id: String): Task? =
         firestore.collection(COLLECTION_TASK).document(id).get().await().toObject()
