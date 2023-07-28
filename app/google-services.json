@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "669734380619",
+    "project_id": "tasksprint-972c7",
+    "storage_bucket": "tasksprint-972c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669734380619:android:6209b81de41cb7ef5299ce",
+        "android_client_info": {
+          "package_name": "com.sdevprem.tasksprint"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "669734380619-ddnusm33dv15dedskeikcgtj3j99f31d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sdevprem.tasksprint",
+            "certificate_hash": "7c53b52901efc43ded64b0b23b9843ecb68d228d"
+          }
+        },
+        {
+          "client_id": "669734380619-9voho429j7751q3n9eql9o0bkc4t8gm4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVWS5wpJE8R8GtSLLascZxok4iK1tXRYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "669734380619-9voho429j7751q3n9eql9o0bkc4t8gm4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
