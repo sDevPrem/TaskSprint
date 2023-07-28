@@ -6,6 +6,7 @@ import com.sdevprem.tasksprint.common.ext.setDateToFirstDateOfMonth
 import com.sdevprem.tasksprint.common.ext.setDateToLastDateOfMonth
 import com.sdevprem.tasksprint.common.ext.toCalendar
 import com.sdevprem.tasksprint.data.TaskFilter
+import com.sdevprem.tasksprint.data.auth.PhoneAuthHandler
 import com.sdevprem.tasksprint.data.model.Task
 import com.sdevprem.tasksprint.data.repository.TaskRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +23,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val taskRepository: TaskRepository
+    private val taskRepository: TaskRepository,
+    private val authHandler: PhoneAuthHandler
 ) : ViewModel() {
 
     private val taskFilter = MutableStateFlow(
@@ -54,6 +56,9 @@ class HomeViewModel @Inject constructor(
             taskRepository.updateTask(task.copy(completed = !task.completed))
         }
     }
+
+    fun onLogOutClick() = authHandler.logout()
+
 
     fun onIncrementDate() {
         taskFilter.update {

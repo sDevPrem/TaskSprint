@@ -60,6 +60,8 @@ class PhoneAuthHandler @Inject constructor(
         }
     }
 
+    fun logout() = auth.signOut()
+
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         _verificationState.value = PhoneAuthState.VerificationInProgress
         auth.signInWithCredential(credential)

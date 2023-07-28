@@ -13,7 +13,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -24,6 +27,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -50,7 +56,16 @@ fun HomeScreen(
         state = state,
         onDecrementDate = viewModel::onDecrementDate,
         onIncrementDate = viewModel::onIncrementDate,
-        onTaskCheckChange = viewModel::onTaskCheckChange
+        onTaskCheckChange = viewModel::onTaskCheckChange,
+        onLogOutClick = {
+            viewModel.onLogOutClick()
+            navController.navigate(Destination.AuthScreen.route) {
+                launchSingleTop = true
+                popUpTo(0) {
+                    inclusive = true
+                }
+            }
+        }
     )
 }
 
@@ -61,7 +76,8 @@ fun HomeScreenContent(
     state: HomeUIState,
     onDecrementDate: () -> Unit,
     onIncrementDate: () -> Unit,
-    onTaskCheckChange: (Task) -> Unit
+    onTaskCheckChange: (Task) -> Unit,
+    onLogOutClick: () -> Unit
 ) {
     Scaffold(
         floatingActionButton = {
@@ -84,6 +100,18 @@ fun HomeScreenContent(
                 title = {
                     Text("Tasks")
                 },
+                actions = {
+                    var showMenu by rememberSaveable { mutableStateOf(false) }
+                    IconButton(onClick = { showMenu = !showMenu }) {
+                        Icon(Icons.Default.MoreVert, null)
+                    }
+                    DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
+                        DropdownMenuItem(
+                            text = { Text("Log out") },
+                            onClick = onLogOutClick
+                        )
+                    }
+                }
             )
         }
     ) { paddingValues ->
