@@ -1,4 +1,4 @@
-package com.sdevprem.tasksprint.data.auth
+package com.sdevprem.tasksprint.core.auth
 
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth

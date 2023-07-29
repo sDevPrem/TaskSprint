@@ -1,12 +1,12 @@
-package com.sdevprem.tasksprint.data.repository
+package com.sdevprem.tasksprint.core.repository
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.dataObjects
 import com.google.firebase.firestore.ktx.toObject
-import com.sdevprem.tasksprint.data.TaskFilter
-import com.sdevprem.tasksprint.data.model.Task
+import com.sdevprem.tasksprint.core.model.Task
+import com.sdevprem.tasksprint.core.utils.TaskFilter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await

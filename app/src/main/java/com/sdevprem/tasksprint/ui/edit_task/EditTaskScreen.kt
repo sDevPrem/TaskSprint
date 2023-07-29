@@ -38,7 +38,7 @@ import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.sdevprem.tasksprint.R
 import com.sdevprem.tasksprint.common.ext.getDisplayDueDate
 import com.sdevprem.tasksprint.common.ext.toDate
-import com.sdevprem.tasksprint.data.model.Task
+import com.sdevprem.tasksprint.core.model.Task
 import java.util.Date
 
 @Composable

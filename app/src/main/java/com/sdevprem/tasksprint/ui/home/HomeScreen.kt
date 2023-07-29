@@ -42,7 +42,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.sdevprem.tasksprint.R
 import com.sdevprem.tasksprint.common.ext.getFormattedSrtMthYr
-import com.sdevprem.tasksprint.data.model.Task
+import com.sdevprem.tasksprint.core.model.Task
 import com.sdevprem.tasksprint.ui.navigation.Destination
 import java.util.Date
 

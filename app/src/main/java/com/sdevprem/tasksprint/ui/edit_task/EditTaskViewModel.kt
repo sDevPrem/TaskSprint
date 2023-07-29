@@ -4,8 +4,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sdevprem.tasksprint.data.model.Task
-import com.sdevprem.tasksprint.data.repository.TaskRepository
+import com.sdevprem.tasksprint.core.model.Task
+import com.sdevprem.tasksprint.core.repository.TaskRepository
 import com.sdevprem.tasksprint.ui.navigation.Destination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

@@ -5,10 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.sdevprem.tasksprint.common.ext.setDateToFirstDateOfMonth
 import com.sdevprem.tasksprint.common.ext.setDateToLastDateOfMonth
 import com.sdevprem.tasksprint.common.ext.toCalendar
-import com.sdevprem.tasksprint.data.TaskFilter
-import com.sdevprem.tasksprint.data.auth.PhoneAuthHandler
-import com.sdevprem.tasksprint.data.model.Task
-import com.sdevprem.tasksprint.data.repository.TaskRepository
+import com.sdevprem.tasksprint.core.auth.PhoneAuthHandler
+import com.sdevprem.tasksprint.core.model.Task
+import com.sdevprem.tasksprint.core.repository.TaskRepository
+import com.sdevprem.tasksprint.core.utils.TaskFilter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow

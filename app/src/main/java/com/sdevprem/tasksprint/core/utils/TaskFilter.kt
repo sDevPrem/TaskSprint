@@ -1,4 +1,4 @@
-package com.sdevprem.tasksprint.data
+package com.sdevprem.tasksprint.core.utils
 
 import java.util.Date
 

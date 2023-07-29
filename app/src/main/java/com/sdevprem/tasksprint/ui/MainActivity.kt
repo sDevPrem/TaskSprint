@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.sdevprem.tasksprint.data.auth.PhoneAuthHandler
+import com.sdevprem.tasksprint.core.auth.PhoneAuthHandler
 import com.sdevprem.tasksprint.ui.navigation.AppNavigation
 import com.sdevprem.tasksprint.ui.theme.TaskSprintTheme
 import dagger.hilt.android.AndroidEntryPoint

@@ -1,6 +1,6 @@
 package com.sdevprem.tasksprint.ui.home
 
-import com.sdevprem.tasksprint.data.model.Task
+import com.sdevprem.tasksprint.core.model.Task
 import java.util.Date
 
 data class HomeUIState(

@@ -1,4 +1,4 @@
-package com.sdevprem.tasksprint.data.auth
+package com.sdevprem.tasksprint.core.auth
 
 sealed interface PhoneAuthState {
     object Idle : PhoneAuthState

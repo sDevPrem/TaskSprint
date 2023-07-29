@@ -3,8 +3,8 @@ package com.sdevprem.tasksprint.ui.auth
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.PhoneAuthOptions
-import com.sdevprem.tasksprint.data.auth.PhoneAuthHandler
-import com.sdevprem.tasksprint.data.auth.PhoneAuthState
+import com.sdevprem.tasksprint.core.auth.PhoneAuthHandler
+import com.sdevprem.tasksprint.core.auth.PhoneAuthState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map

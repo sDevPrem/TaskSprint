@@ -14,7 +14,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sdevprem.tasksprint.common.ext.getDisplayDueDate
-import com.sdevprem.tasksprint.data.model.Task
+import com.sdevprem.tasksprint.core.model.Task
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -1,4 +1,4 @@
-package com.sdevprem.tasksprint.data.model
+package com.sdevprem.tasksprint.core.model
 
 import com.google.firebase.firestore.DocumentId
 import java.util.Date
