@@ -19,6 +19,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -42,12 +43,28 @@ import java.util.concurrent.TimeUnit
 
 @Composable
 fun AuthScreen(
-    viewModel: AuthViewModel = hiltViewModel(),
     navController: NavController
 ) {
 
+    val viewModel: AuthViewModel = hiltViewModel()
     val context = LocalContext.current
     val authUiState by viewModel.authUiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(key1 = authUiState.isSignedInSuccess) {
+        if (authUiState.isSignedInSuccess) {
+            Toast.makeText(
+                context,
+                "Signed In Success",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            navController.navigate(Destination.HomeScreen.route) {
+                popUpTo(Destination.AuthScreen.route) {
+                    inclusive = true
+                }
+            }
+        }
+    }
 
     AuthScreenContent(
         authUiState = authUiState,
@@ -62,13 +79,6 @@ fun AuthScreen(
                 )
         },
         verifyCode = viewModel::verifyCode,
-        onSignedInSuccess = {
-            navController.navigate(Destination.HomeScreen.route) {
-                popUpTo(Destination.AuthScreen.route) {
-                    inclusive = true
-                }
-            }
-        }
     )
 }
 
@@ -77,18 +87,7 @@ private fun AuthScreenContent(
     authUiState: AuthUiState,
     sendCode: (String) -> Unit,
     verifyCode: (String) -> Unit,
-    onSignedInSuccess: () -> Unit
 ) {
-    if (authUiState.isSignedInSuccess) {
-        Toast.makeText(
-            LocalContext.current,
-            "Signed In Success",
-            Toast.LENGTH_SHORT
-        )
-            .show()
-        onSignedInSuccess()
-    }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -249,6 +248,5 @@ private fun AuthScreenPreview() {
         ),
         {},
         {},
-        {}
     )
 }
