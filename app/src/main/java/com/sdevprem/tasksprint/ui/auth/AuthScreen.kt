@@ -2,6 +2,7 @@ package com.sdevprem.tasksprint.ui.auth
 
 import android.app.Activity
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,8 +25,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.sdevprem.tasksprint.R
 import com.sdevprem.tasksprint.ui.navigation.Destination
 import java.util.concurrent.TimeUnit
 
@@ -75,10 +79,6 @@ private fun AuthScreenContent(
     verifyCode: (String) -> Unit,
     onSignedInSuccess: () -> Unit
 ) {
-    var number by rememberSaveable { mutableStateOf("") }
-    var otp by rememberSaveable { mutableStateOf("") }
-    val focusManager = LocalFocusManager.current
-
     if (authUiState.isSignedInSuccess) {
         Toast.makeText(
             LocalContext.current,
@@ -92,9 +92,36 @@ private fun AuthScreenContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(24.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(top = 64.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        HeroSection()
+        Spacer(modifier = Modifier.size(40.dp))
+        AuthSection(
+            modifier = Modifier.weight(1f),
+            authUiState = authUiState,
+            sendCode = sendCode,
+            verifyCode = verifyCode
+        )
+    }
+
+}
+
+@Composable
+private fun AuthSection(
+    modifier: Modifier = Modifier,
+    authUiState: AuthUiState,
+    sendCode: (String) -> Unit,
+    verifyCode: (String) -> Unit,
+) {
+    var number by rememberSaveable { mutableStateOf("") }
+    var otp by rememberSaveable { mutableStateOf("") }
+    val focusManager = LocalFocusManager.current
+
+    Column(
+        modifier = modifier
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         OutlinedTextField(
             value = if (authUiState.numberVerificationMode) number else otp,
@@ -155,7 +182,33 @@ private fun AuthScreenContent(
             )
         }
     }
+}
 
+@Composable
+@Preview(showBackground = true)
+private fun HeroSection(
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            imageVector = ImageVector.vectorResource(id = R.drawable.team_up),
+            contentDescription = null,
+            modifier = Modifier
+                .size(150.dp)
+        )
+
+        Spacer(modifier = Modifier.size(16.dp))
+        Text(
+            text = "Let's start organizing task together",
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.primary
+        )
+
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
