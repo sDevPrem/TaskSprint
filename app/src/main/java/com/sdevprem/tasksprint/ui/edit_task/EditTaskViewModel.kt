@@ -43,18 +43,22 @@ class EditTaskViewModel @Inject constructor(
 
     override fun onDoneClick(popUpScreen: () -> Unit) {
         viewModelScope.launch {
-            val editTask = task.value
-            if (editTask.id.isBlank())
-                repository.saveTask(editTask)
-            else repository.updateTask(editTask)
+            launch {
+                val editTask = task.value
+                if (editTask.id.isBlank())
+                    repository.saveTask(editTask)
+                else repository.updateTask(editTask)
+            }
             popUpScreen()
         }
     }
 
     override fun onDeleteClick(popUpScreen: () -> Unit) {
         viewModelScope.launch {
-            if (task.value.id.isNotBlank())
-                repository.deleteTask(task.value.id)
+            launch {
+                if (task.value.id.isNotBlank())
+                    repository.deleteTask(task.value.id)
+            }
             popUpScreen()
         }
     }

@@ -25,7 +25,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -75,7 +77,11 @@ private fun EditTaskScreenContent(
             .fillMaxSize()
     ) {
         TopAppBar(
-            title = { Text("Edit Task") },
+            title = {
+                Text(
+                    text = if (task.id.isNotBlank()) "Edit Task" else "Add Task"
+                )
+            },
             modifier = Modifier.fillMaxWidth(),
             actions = {
                 IconButton(onClick = {
@@ -95,6 +101,15 @@ private fun EditTaskScreenContent(
                             contentDescription = "Delete task",
                         )
                     }
+            },
+            navigationIcon = {
+                IconButton(onClick = popUpScreen) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_arrow_toward_left),
+                        contentDescription = "Navigate back",
+                        tint = MaterialTheme.colorScheme.onSurface
+                    )
+                }
             }
         )
         Column(

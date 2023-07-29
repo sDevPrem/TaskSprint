@@ -30,8 +30,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -91,7 +93,8 @@ private fun AuthScreenContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 64.dp),
+            .padding(top = 64.dp)
+            .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         HeroSection()
@@ -146,11 +149,13 @@ private fun AuthSection(
             ),
             prefix = {
                 if (authUiState.numberVerificationMode)
-                    Text("+91")
+                    Text(
+                        text = "+91",
+                        fontWeight = FontWeight.Bold
+                    )
             }
         )
 
-        Spacer(modifier = Modifier.size(24.dp))
 
         if (authUiState.isLoading) {
             LoadingDialog(msg = if (authUiState.numberVerificationMode) "Sending code" else "Verifying code")
@@ -159,11 +164,13 @@ private fun AuthSection(
         authUiState.errorMsg?.let {
             Text(
                 text = it,
-                modifier = Modifier.padding(bottom = 16.dp),
-                color = MaterialTheme.colorScheme.error
+                modifier = Modifier.padding(top = 8.dp),
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall,
+                textAlign = TextAlign.Center
             )
         }
-
+        Spacer(modifier = Modifier.size(24.dp))
         Button(
             onClick = {
                 focusManager.clearFocus()
@@ -184,7 +191,6 @@ private fun AuthSection(
 }
 
 @Composable
-@Preview(showBackground = true)
 private fun HeroSection(
     modifier: Modifier = Modifier
 ) {

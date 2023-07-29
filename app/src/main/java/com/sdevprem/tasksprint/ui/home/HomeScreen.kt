@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -24,7 +25,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -96,55 +97,66 @@ fun HomeScreenContent(
             }
         },
         topBar = {
-            TopAppBar(
-                title = {
-                    Text("Tasks")
-                },
-                actions = {
+            Column(
+                modifier = Modifier
+                    .padding(start = 16.dp)
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp)
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        "Tasks",
+                        modifier = Modifier.weight(1f),
+                        textAlign = TextAlign.Start,
+                        style = MaterialTheme.typography.titleLarge
+                    )
                     var showMenu by rememberSaveable { mutableStateOf(false) }
-                    IconButton(onClick = { showMenu = !showMenu }) {
-                        Icon(Icons.Default.MoreVert, null)
-                    }
-                    DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
-                        DropdownMenuItem(
-                            text = { Text("Log out") },
-                            onClick = onLogOutClick
-                        )
+
+                    Column {
+                        IconButton(onClick = { showMenu = !showMenu }) {
+                            Icon(Icons.Default.MoreVert, null)
+                        }
+
+                        DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
+                            DropdownMenuItem(
+                                text = { Text("Log out") },
+                                onClick = onLogOutClick
+                            )
+                        }
                     }
                 }
-            )
+                Spacer(modifier = Modifier.size(4.dp))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Header(
+                        onDecrementDate = onDecrementDate,
+                        onIncrementDate = onIncrementDate,
+                        displayDate = state.date.getFormattedSrtMthYr()
+                    )
+                }
+            }
         }
     ) { paddingValues ->
 
-        Column(
+        Box(
             modifier = Modifier
                 .padding(paddingValues)
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
         ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                Header(
-                    onDecrementDate = onDecrementDate,
-                    onIncrementDate = onIncrementDate,
-                    displayDate = state.date.getFormattedSrtMthYr()
-                )
-            }
             if (state.isLoading)
-                Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
-                }
+                CircularProgressIndicator()
             else if (state.taskList.isEmpty())
-                EmptyLayout(Modifier.weight(1f))
+                EmptyLayout()
             else
                 LazyColumn(
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.fillMaxSize()
                 ) {
                     items(state.taskList, key = { task -> task.id }) { taskItem ->
                         TaskItem(
