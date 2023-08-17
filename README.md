@@ -39,6 +39,8 @@ user using phone number.
 2. Extract SHA1 and SHA256 and add it in the firebase project SHA certificate fingerprints.
 3. Clone and open this project in AndroidStudio.
 4. Connect this project with the firebase project that was created in step 1.
+5. Create index for fields `userId` by Ascending order and `dueDate` by Descending order in
+   tasks collection in order to enable filters.
 
 ## Architecture
 
