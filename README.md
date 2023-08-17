@@ -12,9 +12,9 @@ firebase phone authentication.
 
 ## Screenshots
 
-|                               |                               |                                    |
-|-------------------------------|-------------------------------|------------------------------------|
-| ![](image/ss_screen_auth.png) | ![](image/ss_screen_home.png) | ![](image/ss_screen_edit_task.png) |
+|                                                                                                                 |                                                                                                                 |                                                                                                                      |
+|-----------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| ![ss_screen_auth](https://github.com/sDevPrem/TaskSprint/assets/130966261/89d39783-cc5b-4243-adb5-43e8f1f0b5f5) | ![ss_screen_home](https://github.com/sDevPrem/TaskSprint/assets/130966261/6ddbf188-2a80-4ca6-ae4e-af7e6efe2d1c) | ![ss_screen_edit_task](https://github.com/sDevPrem/TaskSprint/assets/130966261/47483d40-f023-48dc-8b5f-ef3a70875965) |
 
 ## Build with
 
